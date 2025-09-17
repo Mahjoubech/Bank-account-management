@@ -21,14 +21,15 @@ public class CompteCourant extends Compte {
     }
     @Override
     public double  calculerIntret(){
-        System.out.println("heeeeey how r u ");
-
             return 0;
     }
 
     @Override
     public void  afficherDetails() {
-        System.out.println("heeeeey how r u ");
+        System.out.println("Compte Courant: " + code);
+        System.out.println("Solde : " + solde);
+        System.out.println("Découvert autorisé : " + decovert);
 
     }
+    public double getDecovert (){return decovert;};
 }
