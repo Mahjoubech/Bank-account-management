@@ -1,0 +1,7 @@
+*.class
+*.jar
+build/
+out/
+.DS_Store
+*.log
+database.properties

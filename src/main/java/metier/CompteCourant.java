@@ -12,7 +12,7 @@ public class CompteCourant extends Compte {
             System.out.println("Le montant doit être positif");
         }
         if(this.solde - montant >= -decovert){
-          this.solde -= montant;
+            this.solde -= montant;
             System.out.println("Retrait de " + montant + " effectué avec succès.");
         }else{
             System.out.println("Erreur : solde insuffisant, dépassement du découvert autorisé.");
@@ -21,7 +21,7 @@ public class CompteCourant extends Compte {
     }
     @Override
     public double  calculerIntret(){
-            return 0;
+        return 0;
     }
 
     @Override

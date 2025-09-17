@@ -26,8 +26,8 @@ public abstract class Operation {
     public abstract String getType();
 
     @Override
-        public String toString() {
-            return getType() + " de " + montant + "DH - " + DateUtil.formatDate(date);
-        }
+    public String toString() {
+        return getType() + " de " + montant + "DH - " + DateUtil.formatDate(date);
+    }
 
 }
