@@ -1,5 +1,5 @@
 package main.java.metier;
-
+import main.java.util.DateUtil;
 public class Versement extends Operation{
     private String source ;
     public Versement(String id, double montant ,String source){
@@ -13,8 +13,8 @@ public class Versement extends Operation{
     public String getType() {
         return "Versement";
     }
-//    @Override
-//    public String toString() {
-//        return "Versement de " + montant + "€ - Source: " + source + " - " + DateUtil.formatDate(date);
-//    }
+    @Override
+    public String toString() {
+        return "Versement de " + montant + "DH - Source: " + source + " - " + DateUtil.formatDate(date);
+    }
 }

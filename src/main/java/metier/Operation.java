@@ -1,6 +1,8 @@
 package main.java.metier;
+
 import java.time.LocalDateTime;
-import util.DateUtil;
+import main.java.util.DateUtil;
+
 
 public abstract class Operation {
     protected String id;
@@ -22,10 +24,10 @@ public abstract class Operation {
         return date;
     }
     public abstract String getType();
-//    @Override
-//
-//        public String toString() {
-//            return getType() + " de " + montant + "€ - " + DateUtil.formatDate(date);
-//        }
+
+    @Override
+        public String toString() {
+            return getType() + " de " + montant + "DH - " + DateUtil.formatDate(date);
+        }
 
 }
