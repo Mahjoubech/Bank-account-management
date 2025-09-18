@@ -1,20 +1,15 @@
-package main.java.metier;
-import main.java.util.DateUtil;
-public class Versement extends Operation{
-    private String source ;
-    public Versement(String id, double montant ,String source){
-        super(id,montant);
+package metier;
+
+public class Versement extends Operation {
+    private String source;
+
+    public Versement(double montant, String source) {
+        super(montant);
         this.source = source;
     }
-    public String getSource() {
-        return source;
-    }
-    @Override
-    public String getType() {
-        return "Versement";
-    }
+
     @Override
     public String toString() {
-        return "Versement de " + montant + "DH - Source: " + source + " - " + DateUtil.formatDate(date);
+        return super.toString() + " (Versement, Source: " + source + ")";
     }
 }

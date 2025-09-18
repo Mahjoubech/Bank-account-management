@@ -1,35 +1,32 @@
-package main.java.metier;
+package metier;
 
 public class CompteCourant extends Compte {
-    private double decovert ;
-    public CompteCourant(String code , double solde ,double decovert) {
-        super(code,solde);
-        this.decovert = decovert ;
+    private double decouvert;
+
+    public CompteCourant(String code, double solde, double decouvert) {
+        super(code, solde);
+        this.decouvert = decouvert;
     }
+
     @Override
-    public void  retiret(double montant){
-        if(montant <= 0 ){
-            System.out.println("Le montant doit être positif");
+    public void retirer(double montant, String destination) throws Exception {
+        if (solde - montant < -decouvert) {
+            throw new Exception("Solde insuffisant (dépassement du découvert autorisé) !");
         }
-        if(this.solde - montant >= -decovert){
-            this.solde -= montant;
-            System.out.println("Retrait de " + montant + " effectué avec succès.");
-        }else{
-            System.out.println("Erreur : solde insuffisant, dépassement du découvert autorisé.");
+        ajouterOperation(new Retrait(montant, destination));
+    }
 
+    @Override
+    public double calculerInteret() {
+        return 0; // Pas d'intérêt sur compte courant
+    }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("\nCompte Courant [" + code + "]");
+        System.out.println("Solde: " + solde + " EUR, Découvert: " + decouvert);
+        for (Operation op : listeOperations) {
+            System.out.println(op);
         }
     }
-    @Override
-    public double  calculerIntret(){
-        return 0;
-    }
-
-    @Override
-    public void  afficherDetails() {
-        System.out.println("Compte Courant: " + code);
-        System.out.println("Solde : " + solde);
-        System.out.println("Découvert autorisé : " + decovert);
-
-    }
-    public double getDecovert (){return decovert;};
 }

@@ -1,33 +1,25 @@
-package main.java.metier;
+package metier;
 
-import java.time.LocalDateTime;
-import main.java.util.DateUtil;
-
+import java.time.LocalDate;
+import java.util.UUID;
 
 public abstract class Operation {
-    protected String id;
-    protected LocalDateTime  date;
+    protected String numero;
+    protected LocalDate date;
     protected double montant;
 
-    public Operation(String id, double montant) {
-        this.id = id;
+    public Operation(double montant) {
+        this.numero = UUID.randomUUID().toString();
+        this.date = LocalDate.now();
         this.montant = montant;
-        this.date = LocalDateTime.now();
     }
-    public String getId() {
-        return id;
-    }
-    public double getMontant() {
-        return montant;
-    }
-    public LocalDateTime getDate() {
-        return date;
-    }
-    public abstract String getType();
+
+    public String getNumero() { return numero; }
+    public LocalDate getDate() { return date; }
+    public double getMontant() { return montant; }
 
     @Override
     public String toString() {
-        return getType() + " de " + montant + "DH - " + DateUtil.formatDate(date);
+        return "[" + date + "] #" + numero + " : " + montant + " EUR";
     }
-
 }

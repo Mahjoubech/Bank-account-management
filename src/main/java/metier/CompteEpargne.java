@@ -1,38 +1,32 @@
-package main.java.metier;
+package metier;
 
-public class  CompteEpargne extends   Compte {
-    private  double tauxIntert ;
-    public CompteEpargne(String code , double solde  ,double tauxIntert){
-        super(code , solde);
-        this.tauxIntert = tauxIntert;
+public class CompteEpargne extends Compte {
+    private double tauxInteret;
+
+    public CompteEpargne(String code, double solde, double tauxInteret) {
+        super(code, solde);
+        this.tauxInteret = tauxInteret;
     }
 
     @Override
-    public void  retiret(double montant){
-        if(montant <= 0 ){
-            System.out.println("Le montant doit être positif");
+    public void retirer(double montant, String destination) throws Exception {
+        if (solde < montant) {
+            throw new Exception("Solde insuffisant !");
         }
-        if(this.solde >= montant){
-            this.solde -= montant;
-            System.out.println("Retrait de " + montant + " effectué avec succès.");
-        }else{
-            System.out.println("Erreur : solde insuffisant, dépassement du découvert autorisé.");
+        ajouterOperation(new Retrait(montant, destination));
+    }
 
+    @Override
+    public double calculerInteret() {
+        return solde * tauxInteret / 100.0;
+    }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("\nCompte Epargne [" + code + "]");
+        System.out.println("Solde: " + solde + " EUR, Taux: " + tauxInteret + "%");
+        for (Operation op : listeOperations) {
+            System.out.println(op);
         }
     }
-    @Override
-    public double  calculerIntret(){
-        return (solde * tauxIntert) /100;
-    }
-
-    @Override
-    public void  afficherDetails() {
-        System.out.println("Compte Épargne : " + code);
-        System.out.println("Solde : " + solde);
-        System.out.println("Taux d'intérêt: " + tauxIntert + "%");
-        System.out.println("Intérêts annuels: " + calculerIntret());
-    }
-
-
-    public double getTauxIntert(){return tauxIntert;};
 }
