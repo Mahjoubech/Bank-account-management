@@ -75,7 +75,7 @@ public class Menu {
                         System.out.println(ConsoleColor.colorize(ConsoleColor.GREEN, "Retrait effectué !"));
                     }
                     else if (choix == 5) {
-                        List<Compte> comptes = compteDao.findAll();
+                        List<Compte > comptes = compteDao.findAll();
                         System.out.println(ConsoleColor.colorize(ConsoleColor.BOLD + ConsoleColor.CYAN, "\n====== Comptes ======"));
                         comptes.forEach(Compte::afficherDetails);
                     }
