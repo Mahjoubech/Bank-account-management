@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-public class MainApp {
+public class Menu {
     public static void main(String[] args) {
         try {
             Connection cnx = dao.DataConnection.getInstance().getConnection();
