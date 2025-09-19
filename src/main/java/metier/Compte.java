@@ -1,5 +1,4 @@
 package metier;
-
 import metier.Operation;
 import util.Validateur;
 import java.util.ArrayList;
