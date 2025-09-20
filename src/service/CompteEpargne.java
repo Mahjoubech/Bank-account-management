@@ -1,5 +1,4 @@
-package metier;
-
+package service;
 import util.Validateur;
 
 public class CompteEpargne extends Compte {
@@ -14,7 +13,7 @@ public class CompteEpargne extends Compte {
     public void retirer(double montant, String destination) throws Exception {
         if (!Validateur.isPositiveAmount(montant)) throw new Exception("Montant négatif ou nul !");
         if (solde < montant) throw new Exception("Solde insuffisant !");
-        ajouterOperation(new metier.Retrait(montant, destination));
+        ajouterOperation(new Retrait(montant, destination));
         solde -= montant;
     }
     @Override

@@ -1,12 +1,13 @@
 package dao;
 
-import metier.Compte;
-import metier.CompteCourant;
-import metier.CompteEpargne;
+import service.Compte;
+import service.CompteCourant;
+import service.CompteEpargne;
 import util.ConsoleColor;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CompteDao {
     private Connection cnx;
@@ -73,5 +74,16 @@ public class CompteDao {
             ps.setString(2, codeCompte);
             ps.executeUpdate();
         }
+    }
+    public List<Compte> findBySoldeLessThan(double seuil) throws SQLException {
+        return findAll().stream()
+                .filter(c -> c.getSolde() < seuil)
+                .collect(Collectors.toList());
+    }
+
+    public List<Compte> findBySoldeGreaterThan(double seuil) throws SQLException {
+        return findAll().stream()
+                .filter(c -> c.getSolde() > seuil)
+                .collect(Collectors.toList());
     }
 }

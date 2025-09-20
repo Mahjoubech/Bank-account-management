@@ -1,13 +1,14 @@
 package dao;
-import metier.Operation;
-import metier.Versement;
-import metier.Retrait;
+import service.Operation;
+import service.Retrait;
 import util.ConsoleColor;
 import util.DateUtil;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import service.Versement;
+
 
 public class OperationDao {
     private Connection cnx;
@@ -56,4 +57,9 @@ public class OperationDao {
         }
         return list;
     }
+//    public List<Operation> findByType(String type) throws SQLException {
+//        return findAll().stream()
+//                .filter(op -> op.getType().equalsIgnoreCase(type))
+//                .collect(Collectors.toList());
+//    }
 }
