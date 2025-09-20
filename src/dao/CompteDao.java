@@ -86,4 +86,5 @@ public class CompteDao {
                 .filter(c -> c.getSolde() > seuil)
                 .collect(Collectors.toList());
     }
+
 }
