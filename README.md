@@ -135,12 +135,6 @@ java -jar BankApp.jar
 
 ---
 
-## 👤 Auteur
-
-Khalil Abouabdelmajid
-
----
-
 ## 📬 Contact
 
 Pour toute question, ouvrez une issue sur [GitHub](https://github.com/Mahjoubech/Bank-account-management/issues).
