@@ -27,6 +27,7 @@ public class Menu {
                 System.out.println(ConsoleColor.colorize(ConsoleColor.YELLOW, "4. Retrait"));
                 System.out.println(ConsoleColor.colorize(ConsoleColor.CYAN, "5. Afficher tous les comptes"));
                 System.out.println(ConsoleColor.colorize(ConsoleColor.MAGENTA, "6. Afficher opérations de compte"));
+                System.out.println(ConsoleColor.colorize(ConsoleColor.MAGENTA, "7. Verment"));
                 System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "0. Quitter"));
                 System.out.print(ConsoleColor.colorize(ConsoleColor.BOLD, "Choix: "));
                 int choix = sc.nextInt();
@@ -91,6 +92,32 @@ public class Menu {
                         List<Operation> ops = operationDao.findByCompte(code);
                         System.out.println(ConsoleColor.colorize(ConsoleColor.BOLD + ConsoleColor.YELLOW, "\n====== Operations pour compte " + code + " ======"));
                         ops.forEach(op -> System.out.println(ConsoleColor.colorize(ConsoleColor.YELLOW, op.toString())));
+                    }
+                    else if (choix == 7) {
+                        System.out.print("Code compte source : ");
+                        String codeSource = sc.next();
+                        Compte source = compteDao.findByCode(codeSource);
+                        if (source == null) {
+                            System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "Compte source introuvable !"));
+                            continue;
+                        }
+                        System.out.print("Code compte destination : ");
+                        String codeDest = sc.next();
+                        Compte dest = compteDao.findByCode(codeDest);
+                        if (dest == null) {
+                            System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "Compte destination introuvable !"));
+                            continue;
+                        }
+                        System.out.print("Montant à virer : ");
+                        double montant = sc.nextDouble();
+                        sc.nextLine();
+                        try { source.Verment(montant, dest);
+                            compteDao.updateSolde(codeSource, source.getSolde());
+                            compteDao.updateSolde(codeDest, dest.getSolde());
+                            System.out.println(ConsoleColor.colorize(ConsoleColor.GREEN, "Virement effectué !"));
+                        } catch (Exception e) {
+                            System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "Erreur : " + e.getMessage()));
+                        }
                     }
                     else if (choix == 0) break;
                     else System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "Choix invalide !"));

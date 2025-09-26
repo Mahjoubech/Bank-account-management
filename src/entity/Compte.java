@@ -23,6 +23,15 @@ public abstract class Compte {
         ajouterOperation(new Versement(montant, source));
         solde += montant;
     }
+    public void Verment (double montant , Compte compte) throws Exception {
+        if(!Validateur.isPositiveAmount(montant)) throw new IllegalArgumentException("Montant négatif ou nul ");
+        if (this.solde < montant) throw new Exception("Solde insuffisant !");
+        this.solde -= montant ;
+        compte.solde += montant;
+        this.ajouterOperation(new Retrait(montant, compte.getCode()));
+        compte.ajouterOperation(new Versement(montant, this.getCode()));
+        }
+
     public abstract void retirer(double montant, String destination) throws Exception;
     public abstract double calculerInteret();
     public abstract void afficherDetails();
