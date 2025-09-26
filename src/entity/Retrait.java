@@ -1,4 +1,4 @@
-package service;
+package entity;
 
 public class Retrait extends Operation {
     private String destination;

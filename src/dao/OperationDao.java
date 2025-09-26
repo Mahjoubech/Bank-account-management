@@ -1,13 +1,13 @@
 package dao;
-import service.Operation;
-import service.Retrait;
+import entity.Operation;
+import entity.Retrait;
 import util.ConsoleColor;
 import util.DateUtil;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import service.Versement;
+import entity.Versement;
 
 
 public class OperationDao {

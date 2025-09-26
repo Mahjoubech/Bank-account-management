@@ -1,17 +1,18 @@
 package ui;
 
-import service.*;
+import entity.*;
 import dao.CompteDao;
 import dao.OperationDao;
 import util.ConsoleColor;
 import util.Helper;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-    public static void main(String[] args) {
+    public static void afichMenu(){
         try {
             Connection cnx = dao.DataConnection.getInstance().getConnection();
             CompteDao compteDao = new CompteDao(cnx);
@@ -66,12 +67,18 @@ public class Menu {
                         System.out.print("Code compte : "); String code = sc.next();
                         Compte c = compteDao.findByCode(code);
                         if (c == null) { System.out.println(ConsoleColor.colorize(ConsoleColor.RED, "Compte introuvable !")); continue; }
-                        System.out.print("Montant retrait : "); double montant = sc.nextDouble();
-                        sc.nextLine();
-                        System.out.print("Destination : "); String dest = sc.nextLine();
-                        c.retirer(montant, dest);
-                        operationDao.save(new Retrait(montant, dest), code);
-                        System.out.println(ConsoleColor.colorize(ConsoleColor.GREEN, "Retrait effectué !"));
+                        System.out.print("Montant retrait : ");
+                        try {
+                            double montant = sc.nextDouble();
+                            sc.nextLine();
+                            System.out.print("Destination : "); String dest = sc.nextLine();
+                            c.retirer(montant, dest);
+                            operationDao.save(new Retrait(montant, dest), code);
+                            System.out.println(ConsoleColor.colorize(ConsoleColor.GREEN, "Retrait effectué !"));
+                        } catch (Exception e) {
+                            throw new IllegalArgumentException(" Mantant ne pas Chain de caracter " + e.getMessage());
+                        }
+
                     }
                     else if (choix == 5) {
                         List<Compte > comptes = compteDao.findAll();
@@ -79,8 +86,9 @@ public class Menu {
                         comptes.forEach(Compte::afficherDetails);
                     }
                     else if (choix == 6) {
-                        System.out.print("Code compte : "); String code = sc.next();
-                        var ops = operationDao.findByCompte(code);
+                        System.out.print("Code compte : ");
+                        String code = sc.next();
+                        List<Operation> ops = operationDao.findByCompte(code);
                         System.out.println(ConsoleColor.colorize(ConsoleColor.BOLD + ConsoleColor.YELLOW, "\n====== Operations pour compte " + code + " ======"));
                         ops.forEach(op -> System.out.println(ConsoleColor.colorize(ConsoleColor.YELLOW, op.toString())));
                     }

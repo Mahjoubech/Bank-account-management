@@ -1,7 +1,5 @@
-package service;
-
+package entity;
 import util.Validateur;
-
 public class CompteCourant extends Compte {
     private double decouvert;
     public CompteCourant(String code, double solde, double decouvert) {

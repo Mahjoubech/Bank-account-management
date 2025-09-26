@@ -1,4 +1,4 @@
-package service;
+package entity;
 
 public class Versement extends Operation {
     private String source;

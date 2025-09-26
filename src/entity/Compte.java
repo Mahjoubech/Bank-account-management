@@ -1,4 +1,4 @@
-package service;
+package entity;
 import util.Validateur;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,4 +29,5 @@ public abstract class Compte {
     protected void ajouterOperation(Operation op) {
         listeOperations.add(op);
     }
+
 }
